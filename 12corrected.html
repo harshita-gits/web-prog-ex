@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23BCE1478</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 1px solid black;
+            background: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+    <h2>Canvas Scene with Animated Boat</h2>
+    <canvas id="sceneCanvas" width="800" height="500"></canvas>
+    <script>
+        const canvas = document.getElementById("sceneCanvas");
+        const ctx = canvas.getContext("2d");
+        let boatX = 250;
+        let boatDirection = 1;
+
+        function drawScene() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Water
+            ctx.fillStyle = "lightsteelblue";
+            ctx.beginPath();
+            ctx.ellipse(400, 400, 150, 60, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Boat
+            ctx.fillStyle = "brown";
+            ctx.beginPath();
+            ctx.moveTo(boatX, 390);
+            ctx.lineTo(boatX + 100, 390);
+            ctx.quadraticCurveTo(boatX + 50, 420, boatX, 390);
+            ctx.fill();
+
+            // Sun
+            ctx.fillStyle = "yellow";
+            ctx.beginPath();
+            ctx.arc(700, 80, 30, 0, Math.PI * 2);
+            ctx.fill();
+
+            for (let i = 0; i < 12; i++) {
+                let angle = (i * Math.PI) / 6;
+                let x1 = 700 + Math.cos(angle) * 30;
+                let y1 = 80 + Math.sin(angle) * 30;
+                let x2 = 700 + Math.cos(angle) * 45;
+                let y2 = 80 + Math.sin(angle) * 45;
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+            }
+
+            // House
+            ctx.fillStyle = "red";
+            ctx.beginPath();
+            ctx.moveTo(100, 250);
+            ctx.lineTo(50, 300);
+            ctx.lineTo(150, 300);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.fillStyle = "orange";
+            ctx.fillRect(60, 300, 80, 80);
+
+            ctx.fillStyle = "blue";
+            ctx.fillRect(70, 310, 20, 20); // window
+
+            ctx.fillStyle = "brown";
+            ctx.fillRect(100, 330, 25, 50); // door
+
+            // 🌸 Flower
+            const flowerX = 600;
+            const flowerY = 380;
+
+            // Stem
+            ctx.fillStyle = "green";
+            ctx.fillRect(flowerX - 2, flowerY, 4, 50);
+
+            // Petals
+            ctx.fillStyle = "pink";
+            for (let i = 0; i < 6; i++) {
+                const angle = (i * Math.PI) / 3;
+                const x = flowerX + Math.cos(angle) * 20;
+                const y = flowerY + Math.sin(angle) * 20;
+                ctx.beginPath();
+                ctx.arc(x, y, 15, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Center
+            ctx.fillStyle = "yellow";
+            ctx.beginPath();
+            ctx.arc(flowerX, flowerY, 10, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 🐤 Duck
+            ctx.fillStyle = "yellow";
+            ctx.beginPath();
+            ctx.arc(550, 370, 20, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(570, 360, 10, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.arc(574, 355, 3, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = "orange";
+            ctx.beginPath();
+            ctx.moveTo(580, 360);
+            ctx.lineTo(590, 362);
+            ctx.lineTo(580, 364);
+            ctx.closePath();
+            ctx.fill();
+
+            // 🪨 Stones - Left Group
+            ctx.fillStyle = "gray";
+            const stonesLeft = [
+                { x: 60, y: 390, r: 10 },
+                { x: 80, y: 395, r: 12 },
+                { x: 100, y: 390, r: 10 }
+            ];
+            stonesLeft.forEach(stone => {
+                ctx.beginPath();
+                ctx.arc(stone.x, stone.y, stone.r, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // 🪨 Stones - Right Group
+            const stonesRight = [
+                { x: 500, y: 450, r: 8 },
+                { x: 515, y: 455, r: 9 },
+                { x: 530, y: 450, r: 8 }
+            ];
+            stonesRight.forEach(stone => {
+                ctx.beginPath();
+                ctx.arc(stone.x, stone.y, stone.r, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Animate boat
+            boatX += boatDirection * 1;
+            if (boatX > 450 || boatX < 250) {
+                boatDirection *= -1;
+            }
+            requestAnimationFrame(drawScene);
+        }
+
+        drawScene();
+    </script>
+</body>
+</html>

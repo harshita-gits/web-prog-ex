@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23bce1478</title>
+</head>
+<body>
+    <h1>Basic Calculator</h1>
+    <div>
+        <h1>Mathematical Operations</h1>
+        <button onclick="math()">let's do some math !</button>
+    </div>
+    <script>
+        function math(){
+        let num1 = parseFloat(prompt("Enter the first number:"));
+        let num2 = parseFloat(prompt("Enter the second number:"));
+        let operation = prompt("Choose an operation: +, -, *, /, or %");
+
+        let result;
+        if (operation === "+") {
+            result = num1 + num2;
+        } else if (operation === "-") {
+            result = num1 - num2;
+        } else if (operation === "*") {
+            result = num1 * num2;
+        } else if (operation === "/") {
+            if (num2 === 0) {
+                result = "Cannot divide by zero!";
+            } else {
+                result = num1 / num2;
+            }
+        } else if (operation === "%") {
+            result = num1 % num2;
+        } else {
+            result = "Invalid operation!";
+        }
+        alert("The result is: " + result);
+    }
+    </script>
+</body>
+</html>

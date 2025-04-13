@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23BCE1478</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 50%;
+            border: 1px solid black;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 200px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+        .time-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            border: 1px solid black;
+            padding: 5px;
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+        .buttons input {
+            padding: 5px 10px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Test JavaScript Form Validation</h2>
+        <div class="time-box">
+            Time: <span id="currentTime"></span>
+        </div>
+        <form id="userForm">
+            <label>Name*</label>
+            <input type="text" id="name">
+            <span class="error" id="nameError"></span>
+            <br>
+
+            <label>Address</label>
+            <textarea id="address"></textarea>
+            <br>
+
+            <label>Zip Code*</label>
+            <input type="text" id="zip">
+            <span class="error" id="zipError"></span>
+            <br>
+
+            <label>Country*</label>
+            <select id="country">
+                <option value="">Please select...</option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="UK">UK</option>
+            </select>
+            <span class="error" id="countryError"></span>
+            <br>
+
+            <label>Gender*</label>
+            <input type="radio" name="gender" value="Male"> Male
+            <input type="radio" name="gender" value="Female"> Female
+            <span class="error" id="genderError"></span>
+            <br>
+
+            <label>Preferences*</label>
+            <input type="checkbox" name="pref" value="Red"> Red
+            <input type="checkbox" name="pref" value="Green"> Green
+            <input type="checkbox" name="pref" value="Blue"> Blue
+            <span class="error" id="prefError"></span>
+            <br>
+
+            <label>Phone*</label>
+            <input type="text" id="phone">
+            <span class="error" id="phoneError"></span>
+            <br>
+
+            <label>Email*</label>
+            <input type="email" id="email">
+            <span class="error" id="emailError"></span>
+            <br>
+
+            <label>Password (6-8 chars)*</label>
+            <input type="password" id="password">
+            <span class="error" id="passwordError"></span>
+            <br>
+
+            <label>Verify Password*</label>
+            <input type="password" id="verifyPassword">
+            <span class="error" id="verifyPasswordError"></span>
+            <br>
+
+            <label>Pan No:</label>
+            <input type="text" id="pan">
+            <br>
+
+            <div class="buttons">
+                <input type="button" value="SEND" onclick="validateForm()">
+                <input type="reset" value="CLEAR">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function updateTime() {
+            let now = new Date();
+            document.getElementById("currentTime").innerText = now.toLocaleTimeString();
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        function validateForm() {
+            let isValid = true;
+            document.querySelectorAll('.error').forEach(e => e.innerText = "");
+
+            let name = document.getElementById("name").value;
+            if (name.trim() === "") {
+                document.getElementById("nameError").innerText = "Please enter your name!";
+                isValid = false;
+            }
+
+            let zip = document.getElementById("zip").value;
+            if (!/^\d{6}$/.test(zip)) {
+                document.getElementById("zipError").innerText = "Zip code must be 6 digits!";
+                isValid = false;
+            }
+
+            let country = document.getElementById("country").value;
+            if (country === "") {
+                document.getElementById("countryError").innerText = "Please select a country!";
+                isValid = false;
+            }
+
+            let gender = document.querySelector('input[name="gender"]:checked');
+            if (!gender) {
+                document.getElementById("genderError").innerText = "Select your gender!";
+                isValid = false;
+            }
+
+            let preferences = document.querySelectorAll('input[name="pref"]:checked');
+            if (preferences.length === 0) {
+                document.getElementById("prefError").innerText = "Select at least one preference!";
+                isValid = false;
+            }
+
+            let phone = document.getElementById("phone").value;
+            if (!/^\d{10}$/.test(phone)) {
+                document.getElementById("phoneError").innerText = "Phone must be 10 digits!";
+                isValid = false;
+            }
+
+            let email = document.getElementById("email").value;
+            if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+                document.getElementById("emailError").innerText = "Enter a valid email!";
+                isValid = false;
+            }
+
+            let password = document.getElementById("password").value;
+            if (!/^[A-Za-z\d@$!%*?&]{6,8}$/.test(password)) {
+                document.getElementById("passwordError").innerText = "Password must be 6-8 chars!";
+                isValid = false;
+            }
+
+            let verifyPassword = document.getElementById("verifyPassword").value;
+            if (password !== verifyPassword) {
+                document.getElementById("verifyPasswordError").innerText = "Passwords do not match!";
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("Form submitted successfully!");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Resume - Combined</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      grid-template-columns: 200px 1fr 300px;
+      grid-template-areas:
+        "header header header"
+        "nav main aside"
+        "footer footer footer";
+      height: 100vh;
+    }
+    header { grid-area: header; background: #f2f2f2; padding: 10px; text-align: center; }
+    nav { grid-area: nav; background: #e6e6e6; padding: 10px; overflow-y: auto; }
+    main { grid-area: main; padding: 10px; overflow-y: auto; }
+    aside { grid-area: aside; background: #f9f9f9; padding: 10px; overflow-y: auto; }
+    footer { grid-area: footer; background: #f2f2f2; padding: 10px; text-align: center; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Professional Resume</h1>
+</header>
+
+<nav>
+  <ul type="none">
+    <li><a href="#about">About Me</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#media">Media</a></li>
+  </ul>
+</nav>
+
+<main>
+  <section id="about" bgcolor="grey">
+    <h1 align="center">Harshita Kumari</h1>
+    <p align="center">Software Engineer | Machine Learning Enthusiast</p>
+  </section>
+
+  <header>
+    <h3>About Me</h3>
+  </header>
+  <p>A motivated 2nd year student with experience of building few full stack applications.</p>
+
+  <figure align="center">
+    <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="Harshita's profile photo" width="200">
+    <figcaption align="center">Harshita Kumari - Web Developer</figcaption>
+  </figure>
+
+  <section id="education">
+    <h3>Education</h3>
+    <p>Bachelor of Technology in Computer Science and Engineering - VIT Chennai University</p>
+  </section>
+
+  <section id="experience">
+    <h3>Experience</h3>
+    <article>
+      <h4>Web Developer</h4>
+      <p>XYZ Corp - 2024 to Present</p>
+      <p>Developed web applications and websites for clients.</p>
+      <h4>ML Engineer</h4>
+      <p>XYZ Corp - 2024 to Present</p>
+      <p>Developed ML models for classification use cases.</p>
+    </article>
+  </section>
+
+  <section id="skills">
+    <h3>Skills</h3>
+    <p><strong>HTML5</strong> - Intermediate</p>
+    <progress value="75" max="100"></progress><br>
+    <p><strong>JavaScript</strong> - Intermediate</p>
+    <progress value="70" max="100"></progress><br>
+    <p><strong>CSS3</strong> - Intermediate</p>
+    <progress value="75" max="100"></progress>
+  </section>
+
+  <section>
+    <details>
+      <summary>Click for Hobbies</summary>
+      <p>Chess, travelling, and competitive programming.</p>
+    </details>
+  </section>
+</main>
+
+<aside>
+  <h3>Quick Facts</h3>
+  <ul>
+    <li>Location: Chennai, Tamil Nadu</li>
+    <li>Email: harshita121@gmail.com</li>
+    <li>GitHub: github.com/harshita-code</li>
+    <li>Portfolio: kumariharshita.com</li>
+  </ul>
+</aside>
+
+<footer>
+  <p>&copy; 2025 Harshita Kumari. All rights reserved.</p>
+  <p>Contact: harshita121@gmail.com</p>
+</footer>
+
+</body>
+</html>

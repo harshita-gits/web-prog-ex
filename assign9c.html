@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23BCE1478</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+        table {
+            border: 2px solid #000;
+            width: 320px;
+            background-color: #f9f9f9;
+            font-size: 16px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        td {
+            padding: 10px;
+            border: none;
+        }
+        select, input {
+            width: 95%;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            appearance: textfield;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0f71a9;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #110562;
+        }
+        .section-title {
+            font-weight: bold;
+            text-align: left;
+            padding-bottom: 5px;
+        }
+        .bmi-output {
+            background-color: #ffffff;
+            border: 1px solid hsl(0, 6%, 56%);
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>BMI Calculator</h2>
+    <div class="container">
+        <table>
+            <tr>
+                <td colspan="2">
+                    <label>BMI Calculator</label>
+                    <select id="gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title">Enter Your Weight:</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="number" id="weight" placeholder="(in pounds)"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title">Enter Your Height:</td>
+            </tr>
+            <tr>
+                <td><input type="number" id="feet" placeholder="Feet"></td>
+                <td><input type="number" id="inches" placeholder="Inches"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button onclick="calculateBMI()">Calculate</button></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-title">YOUR BMI</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="text" id="bmiResult" class="bmi-output" readonly></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function calculateBMI() {
+            let weight = parseFloat(document.getElementById("weight").value);
+            let feet = parseFloat(document.getElementById("feet").value);
+            let inches = parseFloat(document.getElementById("inches").value);
+            let gender = document.getElementById("gender").value;
+
+            if (isNaN(weight) || isNaN(feet) || isNaN(inches) || weight <= 0 || feet < 0 || inches < 0) {
+                alert("Please enter valid weight and height values.");
+                return;
+            }
+
+            let heightInInches = (feet * 12) + inches;
+            let bmi = (703 * weight) / (heightInInches * heightInInches);
+            bmi = bmi.toFixed(2);
+
+            let bmiType = getBMIType(bmi, gender);
+            document.getElementById("bmiResult").value = bmi;
+
+            // Show BMI and classification in a popup
+            alert(`Your BMI is ${bmi}\nCategory: ${bmiType}`);
+        }
+
+        function getBMIType(bmi, gender) {
+            bmi = parseFloat(bmi);
+            if (gender === "female") {
+                if (bmi < 17.5) return "Anorexia";
+                else if (bmi >= 17.51 && bmi <= 19.10) return "Underweight";
+                else if (bmi >= 19.11 && bmi <= 25.80) return "Ideal range";
+                else if (bmi >= 25.81 && bmi <= 27.30) return "Marginally overweight";
+                else if (bmi >= 27.31 && bmi <= 32.30) return "Overweight";
+                else return "Very overweight or Obese";
+            } else { // Male
+                if (bmi < 17.5) return "Anorexia";
+                else if (bmi >= 17.501 && bmi <= 20.70) return "Underweight";
+                else if (bmi >= 20.71 && bmi <= 26.40) return "Ideal range";
+                else if (bmi >= 26.41 && bmi <= 27.80) return "Marginally overweight";
+                else if (bmi >= 27.81 && bmi <= 31.10) return "Overweight";
+                else return "Very overweight or Obese";
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23BCE1478</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .chart {
+            width: 500px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Dynamic Charts using Plotly.js</h2>
+    <div class="chart-container">
+        <div id="barChart" class="chart"></div>
+        <div id="lineChart" class="chart"></div>
+        <div id="pieChart" class="chart"></div>
+        <div id="donutChart" class="chart"></div>
+    </div>
+
+    <script>
+        Plotly.newPlot("barChart", [{
+            x: ["A", "B", "C", "D", "E"],
+            y: [12, 18, 7, 10, 15],
+            type: "bar",
+            marker: { color: ["red", "blue", "green", "orange", "purple"] }
+        }], {
+            title: "Bar Chart Example",
+            xaxis: { title: "Categories" },
+            yaxis: { title: "Values" }
+        });
+
+        Plotly.newPlot("lineChart", [{
+            x: ["Jan", "Feb", "Mar", "Apr", "May"],
+            y: [10, 15, 8, 20, 18],
+            type: "scatter",
+            mode: "lines+markers",
+            marker: { color: "blue", size: 8 },
+            line: { color: "blue", width: 2 }
+        }], {
+            title: "Line Chart Example",
+            xaxis: { title: "Months" },
+            yaxis: { title: "Values" }
+        });
+
+        Plotly.newPlot("pieChart", [{
+            labels: ["Apple", "Banana", "Cherry", "Grapes", "Orange"],
+            values: [10, 15, 7, 12, 18],
+            type: "pie",
+            marker: { colors: ["red", "yellow", "pink", "purple", "orange"] }
+        }], {
+            title: "Pie Chart Example",
+            showlegend: true
+        });
+
+        Plotly.newPlot("donutChart", [{
+            labels: ["A", "B", "C", "D", "E"],
+            values: [20, 10, 15, 5, 25],
+            type: "pie",
+            hole: 0.4,
+            marker: { colors: ["blue", "green", "red", "purple", "orange"] }
+        }], {
+            title: "Donut Chart Example",
+            showlegend: true
+        });
+    </script>
+</body>
+</html>

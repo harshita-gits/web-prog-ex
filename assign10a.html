@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23bce1478</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 20px;
+        }
+        table {
+            width: 50%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: #eef2f3;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background-color: #a0c4ff;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #5e60ce;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #5c5fbd;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Patient Data Table</h2>
+    <table id="patientTable">
+        <thead>
+            <tr>
+                <th>P-Id</th>
+                <th>Name</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <h3>Actions</h3>
+    <button onclick="sortPatients()">Sort by Age (Descending)</button>
+    <div>
+        <input type="number" id="pIdInput" placeholder="Enter P-Id">
+        <button onclick="checkPatient()">Check P-Id</button>
+        <p id="checkResult"></p>
+    </div>
+    <div>
+        <input type="number" id="minAge" placeholder="Min Age">
+        <input type="number" id="maxAge" placeholder="Max Age">
+        <button onclick="filterByAge()">Filter by Age</button>
+    </div>
+    <h3>Filtered Patients</h3>
+    <table id="filteredTable">
+        <thead>
+            <tr>
+                <th>P-Id</th>
+                <th>Name</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        let patients = [
+            { PId: 1, Name: "Alen", Age: 39 },
+            { PId: 2, Name: "Deena", Age: 47 },
+            { PId: 3, Name: "Diana", Age: 21 },
+            { PId: 4, Name: "Jack", Age: 54 },
+            { PId: 5, Name: "Jain", Age: 23 },
+            { PId: 6, Name: "Kelvin", Age: 61 },
+            { PId: 7, Name: "Louis", Age: 69 },
+            { PId: 8, Name: "Rex", Age: 49 }
+        ];
+        function loadTable(data, tableId) {
+            let tableBody = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = "";
+            data.forEach(patient => {
+                let row = tableBody.insertRow();
+                row.insertCell(0).textContent = patient.PId;
+                row.insertCell(1).textContent = patient.Name;
+                row.insertCell(2).textContent = patient.Age;
+            });
+        }
+        function sortPatients() {
+            let sortedPatients = [...patients].sort((a, b) => b.Age - a.Age);
+            loadTable(sortedPatients, "patientTable");
+        }
+        function checkPatient() {
+            let pId = parseInt(document.getElementById("pIdInput").value);
+            let exists = patients.some(patient => patient.PId === pId);
+            document.getElementById("checkResult").innerText = exists ? "P-Id exists!" : "P-Id not found!";
+        }
+        function filterByAge() {
+            let minAge = parseInt(document.getElementById("minAge").value);
+            let maxAge = parseInt(document.getElementById("maxAge").value);
+            let filteredPatients = patients.filter(patient => patient.Age >= minAge && patient.Age <= maxAge);
+            loadTable(filteredPatients, "filteredTable");
+        }
+        loadTable(patients, "patientTable");
+    </script>
+</body>
+</html>

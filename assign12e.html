@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23bce1478</title>
+    <style>
+        body { 
+            text-align: center; 
+            font-family: Arial, sans-serif; 
+        }
+        .container { 
+            position: relative; 
+            width: 300px; 
+            height: 300px; 
+            margin: auto; 
+            border: 2px solid black; 
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            line-height: 100px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #box1 { background: red; left: 40px; top: 40px; z-index: 1; }
+        #box2 { background: blue; left: 80px; top: 80px; z-index: 2; }
+        #box3 { background: green; left: 120px; top: 120px; z-index: 3; }
+        .controls { margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <h2>Dynamic Z-Index Manipulation</h2>
+
+    <div class="container">
+        <div id="box1" class="box">Box 1</div>
+        <div id="box2" class="box">Box 2</div>
+        <div id="box3" class="box">Box 3</div>
+    </div>
+
+    <div class="controls">
+        <label for="element">Select Element:</label>
+        <select id="element">
+            <option value="box1">Box 1</option>
+            <option value="box2">Box 2</option>
+            <option value="box3">Box 3</option>
+        </select>
+
+        <label for="zIndexInput">Set Z-Index:</label>
+        <input type="number" id="zIndexInput" min="1" max="10" value="1">
+        <button onclick="changeZIndex()">Apply</button>
+
+        <br><br>
+        <button onclick="bringForward()">Bring Forward</button>
+        <button onclick="sendBackward()">Send Backward</button>
+
+        <h3>Current Z-Index Values:</h3>
+        <p id="zIndexValues"></p>
+    </div>
+
+    <script>
+        function updateZIndexDisplay() {
+            const box1 = document.getElementById("box1").style.zIndex;
+            const box2 = document.getElementById("box2").style.zIndex;
+            const box3 = document.getElementById("box3").style.zIndex;
+
+            document.getElementById("zIndexValues").innerHTML = 
+                `Box 1: ${box1}, Box 2: ${box2}, Box 3: ${box3}`;
+        }
+
+        function changeZIndex() {
+            const selectedElement = document.getElementById("element").value;
+            const newZIndex = document.getElementById("zIndexInput").value;
+            document.getElementById(selectedElement).style.zIndex = newZIndex;
+            updateZIndexDisplay();
+        }
+
+        function bringForward() {
+            const selectedElement = document.getElementById("element").value;
+            const element = document.getElementById(selectedElement);
+            element.style.zIndex = parseInt(element.style.zIndex) + 1;
+            updateZIndexDisplay();
+        }
+
+        function sendBackward() {
+            const selectedElement = document.getElementById("element").value;
+            const element = document.getElementById(selectedElement);
+            if (parseInt(element.style.zIndex) > 1) {
+                element.style.zIndex = parseInt(element.style.zIndex) - 1;
+            }
+            updateZIndexDisplay();
+        }
+
+        updateZIndexDisplay();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23BCE1478</title>
+    <style>
+        .input-field {
+            margin: 5px;
+            padding: 5px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="title">Original Title</h1>
+    <button onclick="updateDOM()">Run DOM Methods</button>
+    <br><br>
+    <label>Name: <input type="text" name="username" placeholder="Enter name"></label>
+    <br><br>
+    <label><input type="radio" name="gender" value="Male"> Male</label>
+    <label><input type="radio" name="gender" value="Female"> Female</label>
+    <br><br>
+    <p class="info">This is the first info paragraph. Apples, mangoes, oranges, strawberries, bananas are fruits.</p>
+    <p class="info">This is the second info paragraph. Potato, brinjal, tomato, cauliflower, cabbage are vegetables. </p>
+    <ul>
+        <li>Book</li>
+        <li>Website</li>
+        <li>T-Shirt</li>
+    </ul>
+    <input type="checkbox" class="hobby" value="Reading"> Reading
+    <input type="checkbox" class="hobby" value="Traveling"> Traveling
+    <input type="checkbox" class="hobby" value="Gaming"> Gaming
+    <br><br>
+    <input type="text" class="input-field" placeholder="Type something...">
+    <input type="text" class="input-field" placeholder="Another field...">
+    <script>
+        function updateDOM() {
+            document.getElementById("title").innerText = "Updated Title";
+            document.getElementsByName("username")[0].value = "John Doe";
+            let radios = document.getElementsByName("gender");
+            for (let radio of radios) {
+                if (radio.checked) {
+                    alert("Selected Gender: " + radio.value);
+                }
+            }
+            let paragraphs = document.getElementsByTagName("p");
+            alert("Total <p> elements: " + paragraphs.length);
+            let listItems = document.getElementsByTagName("li");
+            for (let item of listItems) {
+                console.log(item.textContent);
+            }
+            let inputFields = document.getElementsByClassName("input-field");
+            for (let field of inputFields) {
+                field.style.backgroundColor = "lightblue";
+            }
+
+            document.querySelector(".info").innerText = "This is the updated first info paragraph.";
+            document.querySelector("input[name='gender']").checked = true;
+
+            let infoParagraphs = document.querySelectorAll(".info");
+            infoParagraphs.forEach(p => console.log(p.textContent));
+
+            let checkboxes = document.querySelectorAll(".hobby");
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = true;
+                console.log("Checked: " + checkbox.value);
+            });
+        }
+    </script>
+</body>
+</html>

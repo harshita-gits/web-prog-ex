@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <title>23BCE1478</title>
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <form style="width: 400px;">
+            <fieldset style="border: 1px solid black; padding: 10px;">
+                <legend>Login</legend>
+                <label for="username">Username*</label><br>
+                <input type="text" id="username" name="username" required style="width: 100%;"><br><br>
+                <label for="password">Password*</label><br>
+                <input type="password" id="password" name="password" required style="width: 100%;"><br>
+            </fieldset>
+            <br>
+            
+            <fieldset style="border: 1px solid black; padding: 10px;">
+                <legend>Gender*</legend>
+                <input type="radio" id="male" name="gender" value="male" required>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female" required>
+                <label for="female">Female</label>
+            </fieldset>
+            <br>
+            
+            <fieldset style="border: 1px solid black; padding: 10px;">
+                <legend>Programming Skill</legend>
+                <input type="checkbox" id="java" name="skill" value="java">
+                <label for="java">Java</label>
+                <input type="checkbox" id="cpp" name="skill" value="cpp">
+                <label for="cpp">C++</label>
+                <input type="checkbox" id="csharp" name="skill" value="csharp">
+                <label for="csharp">C#</label>
+            </fieldset>
+            <br>
+            
+            <fieldset style="border: 1px solid black; padding: 10px;">
+                <legend>Fruit</legend>
+                <div style="display: flex; align-items: center;">
+                <label for="fruit">Choose a fruit:    </label>
+                <select id="fruit" name="fruit" style="width: 50%;">
+                    <optgroup label="Pome">
+                        <option value="apple">Apple</option>
+                        <option value="pear">Pear</option>
+                    </optgroup>
+                    <optgroup label="Citrus">
+                        <option value="orange">Orange</option>
+                        <option value="grapefruit">Grapefruit</option>
+                        <option value="mandarin">Mandarins</option>
+                        <option value="lime">Lime</option>
+                    </optgroup>
+                    <optgroup label="Stone">
+                        <option value="nectarine">Nectarines</option>
+                        <option value="apricot">Apricots</option>
+                        <option value="peach">Peaches</option>
+                        <option value="plum">Plums</option>
+                    </optgroup>
+                    <optgroup label="Exotic">
+                        <option value="banana">Bananas</option>
+                        <option value="mango">Mangoes</option>
+                    </optgroup>
+                    <optgroup label="Berries">
+                        <option value="strawberry">Strawberries</option>
+                        <option value="raspberry">Raspberries</option>
+                        <option value="blueberry">Blueberries</option>
+                        <option value="kiwifruit">Kiwifruit</option>
+                        <option value="passionfruit">Passionfruit</option>
+                    </optgroup>
+                    <optgroup label="Melons">
+                        <option value="watermelon">Watermelons</option>
+                        <option value="rockmelon">Rockmelons</option>
+                        <option value="honeydew">Honeydew Melons</option>
+                    </optgroup>
+                </select>
+                </div>
+            </fieldset>
+            <br>
+        
+            <textarea name="comment" rows="5" cols="40" placeholder="Enter your comment here" style="width: 100%;"></textarea>
+            <br><br>
+            
+            <div style="display: flex; justify-content: space-between;">
+                <button type="submit">SEND</button>
+                <button type="reset">RESET</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

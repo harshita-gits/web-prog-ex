@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Media and Graphics Example</title>
+  <style>
+    body {
+      display: grid;
+      grid-template-columns: 30% 70%;
+      gap: 20px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    section, article {
+      margin-bottom: 20px;
+    }
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Column - Media -->
+  <aside>
+    <h2>Media and Graphics</h2>
+
+    <section id="audio">
+      <h3>Audio</h3>
+      <audio controls>
+        <source src="audio_sample.mp3" type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
+    </section>
+
+    <section id="video">
+      <h3>Video</h3>
+      <video width="300" height="240" controls>
+        <source src="sample_video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </section>
+
+    <section id="canvas">
+      <h3>Canvas</h3>
+      <canvas id="myCanvas" width="300" height="300"></canvas>
+    </section>
+  </aside>
+
+  <!-- Right Column - SVG Drawing -->
+  <main>
+    <article>
+      <h2>My House using SVG</h2>
+      <figure>
+        <svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+          <rect x="100" y="100" width="100" height="100" fill="brown" stroke="black" stroke-width="2" />
+          <polygon points="100,100 150,50 200,100" fill="red" stroke="black" stroke-width="2" />
+          <rect x="110" y="110" width="30" height="30" fill="lightblue" stroke="black" stroke-width="2" />
+          <rect x="160" y="110" width="30" height="30" fill="lightblue" stroke="black" stroke-width="2" />
+          <rect x="140" y="150" width="20" height="50" fill="brown" stroke="black" stroke-width="2" />
+          <rect x="135" y="200" width="30" height="5" fill="gray" stroke="black" stroke-width="1" />
+          <rect x="130" y="205" width="40" height="5" fill="gray" stroke="black" stroke-width="1" />
+          <circle cx="150" cy="80" r="10" fill="yellow" stroke="black" stroke-width="2" />
+          <circle cx="260" cy="50" r="15" fill="yellow" stroke="black"/>
+          <circle cx="267" cy="50" r="12" fill="white" />
+          <polygon points="230,40 233,47 240,47 235,52 237,60 230,55 223,60 225,52 220,47 227,47" 
+                  fill="yellow" stroke="black" stroke-width="1" />
+        </svg>
+      </figure>
+    </article>
+  </main>
+
+  <!-- Optional: Canvas Drawing Script-->
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#ADD8E6';
+    ctx.fillRect(50, 50, 200, 200);
+    ctx.fillStyle = '#8B0000';
+    ctx.beginPath();
+    ctx.moveTo(50, 50);
+    ctx.lineTo(150, 0);
+    ctx.lineTo(250, 50);
+    ctx.closePath();
+    ctx.fill();
+  </script>
+
+</body>
+</html>

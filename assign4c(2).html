@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Feedback</title>
+</head>
+<body background="bg1.jpg" style="background-size: cover; background-position: center; height: 100%; margin:0;">
+    <h2>Feedback Sliders</h2>
+
+    <label for="slider1">Design:</label>
+    <input type="range" id="slider1" min="1" max="10" value="5">
+    <output for="slider1" id="output1"></output><br><br>
+
+    <label for="slider2">Quality:</label>
+    <input type="range" id="slider2" min="1" max="10" value="5">
+    <output for="slider2" id="output2"></output><br><br>
+
+    <label for="slider3">Price:</label>
+    <input type="range" id="slider3" min="1" max="10" value="5">
+    <output for="slider3" id="output3"></output><br><br>
+
+    <script>
+        const slider1 = document.getElementById('slider1');
+        const output1 = document.getElementById('output1');
+        const slider2 = document.getElementById('slider2');
+        const output2 = document.getElementById('output2');
+        const slider3 = document.getElementById('slider3');
+        const output3 = document.getElementById('output3');
+
+        output1.innerHTML = slider1.value;
+        output2.innerHTML = slider2.value;
+        output3.innerHTML = slider3.value;
+
+        slider1.oninput = () => {
+            output1.innerHTML = slider1.value;
+        };
+
+        slider2.oninput = () => {
+            output2.innerHTML = slider2.value;
+        };
+
+        slider3.oninput = () => {
+            output3.innerHTML = slider3.value;
+        };
+    </script>
+
+    <form action="assign4c(3).html">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

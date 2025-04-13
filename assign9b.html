@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+    <title>23BCE1478</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            border: 2px solid black;
+            padding: 20px;
+            width: 60%;
+            margin: auto;
+        }
+        h1, h3 {
+            text-align: center;
+        }
+        #boardingPass {
+            width: 300px;
+            margin: 20px auto;
+            padding: 15px;
+            border: 2px solid #000;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .seat {
+            width: 35px;
+            height: 35px; 
+            display: inline-block;
+            margin: 5px;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .available {
+            background-color: lightgreen;
+            color: black;
+        }
+        .taken {
+            background-color: red;
+            color: white;
+        }
+        .row {
+            text-align: center;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        #seatStatus {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #seatStatus .section {
+            width: 80%;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Flight Seat Reservation System</h1>
+    <div>
+        <label for="name">Enter Your Name: </label>
+        <input type="text" id="name" />
+    </div>
+    <div>
+        <label for="section">Select Preferred Section (1 for First-Class, 2 for Economy): </label>
+        <input type="number" id="section" min="1" max="2" />
+    </div>
+    <button onclick="assignSeat()">Reserve Seat</button>
+    <h3>Seating Chart</h3>
+    <div id="seatStatus"></div>
+    <div id="boardingPass"></div>
+
+    <script>
+        const seats = new Array(10).fill(0);
+        const firstClassRange = [0, 1, 2, 3, 4]; 
+        const economyRange = [5, 6, 7, 8, 9]; 
+        function updateSeatStatus() {
+            let status = "<div>";
+            status += "<div class='section'><h4>First-Class (Seats 1-5)</h4>";
+            status += "<div class='row'>";
+            firstClassRange.forEach(index => {
+                status += `<div class="seat ${seats[index] === 0 ? 'available' : 'taken'}" onclick="alert('Seat ${index + 1} is ${seats[index] === 0 ? 'Available' : 'Taken'}')">${index + 1}</div>`;
+            });
+            status += "</div></div>";
+            status += "<div class='section'><h4>Economy (Seats 6-10)</h4>";
+            status += "<div class='row'>";
+            economyRange.forEach(index => {
+                status += `<div class="seat ${seats[index] === 0 ? 'available' : 'taken'}" onclick="alert('Seat ${index + 1} is ${seats[index] === 0 ? 'Available' : 'Taken'}')">${index + 1}</div>`;
+            });
+            status += "</div></div>";
+            status += "</div>";
+            document.getElementById('seatStatus').innerHTML = status;
+        }
+
+        function assignSeat() {
+            const name = document.getElementById('name').value;
+            const section = parseInt(document.getElementById('section').value);
+            if (name === "") {
+                alert("Please enter your name.");
+                return;
+            }
+            let assignedSeat = -1;
+            let seatClass = '';
+            if (section === 1) { 
+                for (let i = 0; i < firstClassRange.length; i++) {
+                    if (seats[firstClassRange[i]] === 0) {
+                        seats[firstClassRange[i]] = 1; 
+                        assignedSeat = firstClassRange[i] + 1;
+                        seatClass = 'First-Class';
+                        break;
+                    }
+                }
+                if (assignedSeat === -1) {
+                    const acceptEconomy = confirm("First-Class is full. Would you like to sit in Economy?");
+                    if (acceptEconomy) {
+                        for (let i = 0; i < economyRange.length; i++) {
+                            if (seats[economyRange[i]] === 0) {
+                                seats[economyRange[i]] = 1;
+                                assignedSeat = economyRange[i] + 1;
+                                seatClass = 'Economy';
+                                break;
+                            }
+                        }
+                    }
+                }
+            } else if (section === 2) { 
+                for (let i = 0; i < economyRange.length; i++) {
+                    if (seats[economyRange[i]] === 0) {
+                        seats[economyRange[i]] = 1;
+                        assignedSeat = economyRange[i] + 1;
+                        seatClass = 'Economy';
+                        break;
+                    }
+                }
+                if (assignedSeat === -1) {
+                    const acceptFirstClass = confirm("Economy is full. Would you like to sit in First-Class?");
+                    if (acceptFirstClass) {
+                        for (let i = 0; i < firstClassRange.length; i++) {
+                            if (seats[firstClassRange[i]] === 0) {
+                                seats[firstClassRange[i]] = 1;
+                                assignedSeat = firstClassRange[i] + 1;
+                                seatClass = 'First-Class';
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            if (assignedSeat === -1) {
+                alert("Sorry, the flight is fully booked.");
+            } else {
+                document.getElementById('boardingPass').innerHTML = `
+                    <h3>Boarding Pass</h3>
+                    <div class="boarding-pass-content">
+                        <p><strong>Name:</strong> ${name}</p>
+                        <p><strong>Seat Number:</strong> ${assignedSeat}</p>
+                        <p><strong>Class:</strong> ${seatClass}</p>
+                    </div>
+                `;
+            }
+            updateSeatStatus();
+        }
+        updateSeatStatus();
+    </script>
+</body>
+</html>

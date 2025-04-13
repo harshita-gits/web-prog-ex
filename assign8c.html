@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23bce1478</title>
+</head>
+<body>
+    <h1 style="text-align: center; color: #4CAF50;">Student Confirmation</h1>
+    <div style="text-align: center;">
+        <label for="regNumber" style="font-size: 1.2rem;">Enter your Registration Number: </label>
+        <input type="text" id="regNumber" placeholder="Registration Number" style="padding: 10px; font-size: 1rem; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc;">
+        <br><br>
+        <button onclick="confirmStudentStatus()" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer;">
+            Confirm Status
+        </button>
+    </div>
+    <script>
+        function confirmStudentStatus() {
+            let regNumber = document.getElementById("regNumber").value;
+            if (regNumber.trim() === "") {
+                alert("Please enter a registration number.");
+                return;}
+            let isStudent = confirm("Are you a student with Registration Number: " + regNumber + "?");
+            if (isStudent) {
+                alert("Thank you for confirming. You are a student.");
+            } else {
+                alert("You are not confirmed as a student. Please check your details.");
+            }
+        }
+    </script>
+</body>
+</html>

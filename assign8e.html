@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23BCE1478</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #222;
+        }
+        .output {
+            margin-top: 20px;
+        }
+        .name-box {
+            border: 1px solid black;
+            padding: 5px 15px;
+            display: inline-block;
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Details</h2>
+        <input type="text" id="regNo" placeholder="Registration Number">
+        <br>
+        <input type="text" id="name" placeholder="Your Name">
+        <br>
+        <button onclick="displayDetails()">Submit</button>
+        <div class="output">
+            <div id="displayName"></div>
+        </div>
+    </div>
+    <script>
+        function displayDetails() {
+            var regNo = document.getElementById("regNo").value;
+            var name = document.getElementById("name").value;
+
+            document.write("<div style='border: 2px solid red; display: inline-block; padding: 5px 15px; font-weight: bold; text-transform: lowercase; margin-bottom:20px;'>" 
+                + regNo.toLowerCase() + "</div>");
+
+            var nameContainer = document.createElement("div");
+            nameContainer.setAttribute("class", "name-box");
+            nameContainer.innerHTML = "* " + name + " *";
+            document.body.appendChild(nameContainer);
+        }
+    </script>
+</body>
+</html>

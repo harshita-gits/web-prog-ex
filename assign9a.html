@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23BCE1478</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        th {
+            background-color: lightcyan;
+        }
+    </style>
+</head>
+<body>
+    <h1>Temperature Categories</h1>
+    <div id="summary">
+        <p>Hot Days: <span id="hotCount">0</span></p>
+        <p>Pleasant Days: <span id="pleasantCount">0</span></p>
+        <p>Cold Days: <span id="coldCount">0</span></p>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Temperature (°F)</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody id="temperatureTable">
+        </tbody>
+    </table>
+    <script>
+        const temperatures = [55, 62, 68, 74, 59, 45, 41, 58, 60, 67, 65, 78, 82, 88, 91, 92, 90, 93, 87, 80, 78, 79, 72, 68, 61, 59, 55, 65];
+        let hotCount = 0;
+        let pleasantCount = 0;
+        let coldCount = 0;
+        const tableBody = document.getElementById('temperatureTable');
+        temperatures.forEach((temp, index) => {
+            let category = '';
+            if (temp >= 85) {
+                category = 'HOT';
+                hotCount++;
+            } else if (temp >= 60) {
+                category = 'PLEASANT';
+                pleasantCount++;
+            } else {
+                category = 'COLD';
+                coldCount++;
+            }
+            let row = document.createElement('tr');
+            row.innerHTML = `
+                <td>Day ${index + 1}</td>
+                <td>${temp}</td>
+                <td>${category}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+        document.getElementById('hotCount').textContent = hotCount;
+        document.getElementById('pleasantCount').textContent = pleasantCount;
+        document.getElementById('coldCount').textContent = coldCount;
+    </script>
+</body>
+</html>

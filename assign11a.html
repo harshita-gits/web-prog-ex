@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23BCE1478</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        td {
+            border: 2px solid black;
+            width: 100px;
+            height: 50px;
+            text-align: center;
+        }
+        button {
+            background-color: red;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+        input {
+            margin: 15px;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Dynamic Table</h3>
+    <div id="table-container"></div>
+
+    <h3>Button Hover Effect</h3>
+    <div id="button-container"></div>
+
+    <h3>Textbox Events</h3>
+    <div id="textbox-container"></div>
+
+    <h3>Input Field & Double Click Button</h3>
+    <input type="text" id="input-field">
+    <button id="add-btn">Add to List</button>
+    <ul id="list"></ul>
+
+    <h3>Keypress Counter</h3>
+    <input type="text" id="keypress-input" placeholder="Type here">
+    <input type="text" id="keypress-counter" placeholder="Keypress count" readonly>
+
+    <script>
+        const tableContainer = document.getElementById("table-container");
+        const table = document.createElement("table");
+        for (let i = 0; i < 3; i++) {
+            const row = document.createElement("tr");
+            for (let j = 0; j < 3; j++) {
+                const cell = document.createElement("td");
+                cell.textContent = `row${i + 1},col${j + 1}`;
+                row.appendChild(cell);
+            }
+            table.appendChild(row);
+        }
+        tableContainer.appendChild(table);
+
+        const buttonContainer = document.getElementById("button-container");
+        const button = document.createElement("button");
+        button.textContent = "Hover Me";
+        button.onmouseover = () => button.style.backgroundColor = "green";
+        button.onmouseout = () => button.style.backgroundColor = "red";
+        buttonContainer.appendChild(button);
+
+        const textboxContainer = document.getElementById("textbox-container");
+        const textbox = document.createElement("input");
+        textbox.type = "text";
+        textbox.style.backgroundColor = "green";
+        textbox.onfocus = () => textbox.style.backgroundColor = "yellow";
+        textbox.onchange = () => {
+            alert("Hello! You've changed the text."); 
+        };
+        textboxContainer.appendChild(textbox);
+
+        document.getElementById("add-btn").ondblclick = function () {
+            const inputField = document.getElementById("input-field");
+            const listItem = document.createElement("li");
+            listItem.textContent = inputField.value;
+            document.getElementById("list").appendChild(listItem);
+            inputField.value = "";
+        };
+
+        let keypressCount = 0;
+        document.getElementById("keypress-input").addEventListener("keypress", function () {
+            keypressCount++;
+            document.getElementById("keypress-counter").value = keypressCount;
+        });
+    </script>
+</body>
+</html>

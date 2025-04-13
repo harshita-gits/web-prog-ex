@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23BCE1478</title>
+    <style>
+        body { 
+            text-align: center; 
+            font-family: Arial, sans-serif; 
+        }
+        canvas { 
+            border: 2px solid black; 
+            background: white; 
+        }
+    </style>
+</head>
+<body>
+    <h2>Analog Clock</h2>
+    <canvas id="clockCanvas" width="400" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById("clockCanvas");
+        const ctx = canvas.getContext("2d");
+        const radius = canvas.width / 2;
+        function drawClock() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw clock face
+            ctx.fillStyle = "lightgray";
+            ctx.beginPath();
+            ctx.arc(radius, radius, radius - 10, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 4;
+            ctx.stroke();
+
+            // Draw numbers
+            ctx.fillStyle = "black";
+            ctx.font = "24px Arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+
+            for (let i = 1; i <= 12; i++) {
+                let angle = (i * Math.PI) / 6 - Math.PI / 2;
+                let x = radius + Math.cos(angle) * (radius - 40);
+                let y = radius + Math.sin(angle) * (radius - 40);
+                ctx.fillText(i, x, y);
+            }
+
+            // Draw tick marks
+            for (let i = 0; i < 60; i++) {
+                let angle = (i * Math.PI) / 30 - Math.PI / 2;
+                let x1 = radius + Math.cos(angle) * (radius - 10);
+                let y1 = radius + Math.sin(angle) * (radius - 10);
+                let x2 = radius + Math.cos(angle) * (radius - (i % 5 === 0 ? 20 : 10));
+                let y2 = radius + Math.sin(angle) * (radius - (i % 5 === 0 ? 20 : 10));
+
+                ctx.strokeStyle = "black";
+                ctx.lineWidth = i % 5 === 0 ? 3 : 1;
+
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+            }
+
+            // Get current time
+            let now = new Date();
+            let hours = now.getHours() % 12;
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+
+            // Draw clock hands
+            drawHand(hours * 30 + minutes / 2, radius * 0.5, 6, "black"); 
+            drawHand(minutes * 6, radius * 0.7, 4, "black"); 
+            drawHand(seconds * 6, radius * 0.85, 2, "red");  
+
+            // Draw center point
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.arc(radius, radius, 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Update every second
+            setTimeout(drawClock, 1000);
+        }
+        function drawHand(angle, length, width, color) {
+            let radian = (Math.PI / 180) * angle - Math.PI / 2;
+            ctx.strokeStyle = color;
+            ctx.lineWidth = width;
+            ctx.beginPath();
+            ctx.moveTo(radius, radius);
+            ctx.lineTo(radius + Math.cos(radian) * length, radius + Math.sin(radian) * length);
+            ctx.stroke();
+        }
+        drawClock();
+    </script>
+</body>
+</html>

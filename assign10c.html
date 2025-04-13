@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>23BCE1478</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d3d9b4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #7a815c;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            color: white;
+            text-align: center;
+        }
+        .input-group {
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+        .product {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .product img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+        }
+        .product-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-grow: 1;
+        }
+        .product input[type="text"] {
+            width: 60px;
+            text-align: center;
+        }
+        .submit-btn {
+            width: 50%;
+            background-color: #c29d5b;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        .submit-btn:hover {
+            background-color: #a37f44;
+        }
+        #receipt {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="orderForm">
+            <h2>Grocery Order Form</h2>
+            <div class="input-group">
+                <label>Customer Name:</label>
+                <input type="text" id="customerName" required>
+            </div>
+            <div class="input-group">
+                <label>Phone Number:</label>
+                <input type="text" id="phoneNumber" required>
+            </div>
+            <div class="input-group">
+                <label>Email:</label>
+                <input type="email" id="email" required>
+            </div>
+            <h3>Products</h3>
+            <div class="product">
+                <img src="apple.jpg" alt="Apple">
+                <input type="checkbox" id="appleCheck">
+                <label for="appleCheck">Apple </label>
+                <label for="appleCheck">$10 </label>
+                <input type="text" id="appleQty" placeholder="kg" disabled>
+            </div>
+            <div class="product">
+                <img src="banana.jpg" alt="Banana">
+                <input type="checkbox" id="bananaCheck">
+                <label for="bananaCheck">Banana - $5</label>
+                <input type="text" id="bananaQty" placeholder="kg" disabled>
+            </div>
+            <div class="product">
+                <img src="avocado.jpg" alt="Avocado">
+                <input type="checkbox" id="avocadoCheck">
+                <label for="avocadoCheck">Avocado - $7</label>
+                <input type="text" id="avocadoQty" placeholder="kg" disabled>
+            </div>
+            <button class="submit-btn" onclick="submitOrder()">SUBMIT</button>
+        </div>
+        <div id="receipt">
+            <h2>Order Receipt</h2>
+            <div id="receiptContent"></div>
+            <button class="submit-btn" onclick="goBack()">Back</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById("appleCheck").addEventListener("change", function () {
+            document.getElementById("appleQty").disabled = !this.checked;
+        });
+        document.getElementById("bananaCheck").addEventListener("change", function () {
+            document.getElementById("bananaQty").disabled = !this.checked;
+        });
+        document.getElementById("avocadoCheck").addEventListener("change", function () {
+            document.getElementById("avocadoQty").disabled = !this.checked;
+        });
+        function submitOrder() {
+            let customerName = document.getElementById("customerName").value;
+            let phoneNumber = document.getElementById("phoneNumber").value;
+            let email = document.getElementById("email").value;
+            if (!customerName || !phoneNumber || !email) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+            let selectedProducts = [];
+            let totalCost = 0;
+            let productList = [
+                { id: "appleQty", check: "appleCheck", name: "Apple", price: 10 },
+                { id: "bananaQty", check: "bananaCheck", name: "Banana", price: 5 },
+                { id: "avocadoQty", check: "avocadoCheck", name: "Avocado", price: 7 }
+            ];
+            productList.forEach(product => {
+                let isChecked = document.getElementById(product.check).checked;
+                if (isChecked) {
+                    let quantity = parseFloat(document.getElementById(product.id).value) || 0;
+                    if (isNaN(quantity) || quantity <= 0) {
+                        alert(`Please enter a valid number for ${product.name}`);
+                        return;
+                    }
+                    let cost = product.price * quantity;
+                    totalCost += cost;
+                    selectedProducts.push({ name: product.name, quantity: quantity, cost: cost });
+                }
+            });
+            if (selectedProducts.length === 0) {
+                alert("Please select at least one product.");
+                return;
+            }
+            let receiptHTML = `
+                <p><strong>Name:</strong> ${customerName}</p>
+                <p><strong>Phone:</strong> ${phoneNumber}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <h3>Products Ordered:</h3>
+                <ul>`;
+            selectedProducts.forEach(product => {
+                receiptHTML += `<li>${product.name} - ${product.quantity} kg ($${product.cost})</li>`;
+            });
+            receiptHTML += `</ul>
+                <h3>Total Cost: $${totalCost}</h3>`;
+            document.getElementById("receiptContent").innerHTML = receiptHTML;
+            document.getElementById("orderForm").style.display = "none";
+            document.getElementById("receipt").style.display = "block";
+        }
+        function goBack() {
+            document.getElementById("orderForm").style.display = "block";
+            document.getElementById("receipt").style.display = "none";
+        }
+    </script>
+</body>
+</html>

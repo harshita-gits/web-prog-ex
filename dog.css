@@ -1,0 +1,99 @@
+.main{
+    font-size:70px;
+    font-family:'Times New Roman';
+    font-weight:bold;
+    font-style: oblique;
+    text-align:center;
+    animation:rainbow 7s infinite;
+}
+img{
+    margin-top:100px; 
+    margin-right:0px;
+    float:left;
+}
+body{
+    background-image:url("petbg.avif");
+    align:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+div{
+    columns:3;
+    column-width:200px;
+    column-rule-color:rgb(16, 16, 15);
+    column-rule-style:solid;
+    column-rule-width:2px;
+    column-rule-style: dotted;
+    column-gap: 10px;
+    column-fill: balance;
+    line-height: 30pt;
+    font-size:15px;
+    color: rgb(40, 23, 23);
+}
+@keyframes rainbow{
+    0% {
+        color:red
+    }
+    14%{
+        color:orange
+    }
+    29%{
+        color:yellow
+    }
+    43%{
+        color:green
+    }
+    58%{
+        color:blue
+    }
+    72%{
+        color:indigo
+    }
+    87%{
+        color:violet
+    }
+    100%{
+        color:red
+    }
+}
+.hehe{
+    animation:und 3s infinite;
+    float:left;
+}
+@keyframes und{
+    0% {
+        transform: translateY(0);
+        
+    }
+    25%{
+        transform:translateY(50px);
+    }
+    50%{
+        transform:translateY(100px);}
+    75%{
+        transform:translateY(-50px);
+    }
+    100%{
+        transform:translateY(0);
+    }
+}
+.dance{
+    animation: rot 1s infinite;
+}
+@keyframes rot{
+    0%{
+        transform:rotate(0deg);
+    }
+    25%{
+        transform:rotate(45deg);
+    }
+    50%{
+        transform:rotate(90deg);
+    }
+    75%{
+        transform:rotate(135deg);
+    }
+    100%{
+        transform:rotate(180deg);
+    }
+}

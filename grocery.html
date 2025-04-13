@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grocery Checkout</title>
+  <link rel="stylesheet" href="grocery.css">
+</head>
+<body>
+
+  <h2>Checkout Page</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price (₹)</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Organic Tomato</td>
+        <td><input type="number" id="qtyTomato" value="4" min="0" onchange="calculateTotal()"></td>
+        <td>20</td>
+        <td id="totalTomato">80</td>
+      </tr>
+      <tr>
+        <td>Farm Eggs</td>
+        <td><input type="number" id="qtyEggs" value="5" min="0" onchange="calculateTotal()"></td>
+        <td>50</td>
+        <td id="totalEggs">250</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Total Cost: ₹<span id="totalCost">330.00</span></strong></p>
+
+  <form id="orderForm" onsubmit="placeOrder(event)">
+    <label>Coupon Code: <input type="text" id="couponCode"></label><br><br>
+
+    <label>Address: <textarea id="address"></textarea></label><br><br>
+
+    <label>Delivery Time:
+      <select id="deliveryTime">
+        <option value="Morning">Morning</option>
+        <option value="Afternoon" selected>Afternoon</option>
+        <option value="Evening">Evening</option>
+      </select>
+    </label><br><br>
+
+    <label>Payment Method:</label>
+    <input type="radio" name="payment" value="UPI" checked> UPI
+    <input type="radio" name="payment" value="Card"> Card
+    <input type="radio" name="payment" value="COD"> COD <br><br>
+
+    <button type="submit">Place Order</button>
+  </form>
+
+  <div id="confirmation" class="confirmation-box" style="display:none;">
+    <h3>Order Confirmation</h3>
+    <p id="confirmAddress"></p>
+    <p id="confirmTotal"></p>
+  </div>
+
+  <script src="grocery.js"></script>
+</body>
+</html>

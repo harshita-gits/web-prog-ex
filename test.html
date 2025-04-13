@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Login Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 300px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; }
+        .hidden { display: none; }
+        .greeting { margin-top: 20px; padding: 10px; background-color: green; color: white; text-align: center; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Customer Login</h2>
+        <label for="customerId">Customer ID:</label>
+        <input type="text" id="customerId" maxlength="14" oninput="validateCustomerId()" required><br><br>
+        
+        <label for="customerName">Customer Name:</label>
+        <input type="text" id="customerName" maxlength="25" oninput="validateCustomerName()" disabled required><br><br>
+        
+        <label for="password">Generated Password:</label>
+        <input type="text" id="password" readonly onfocus="generatePassword()" disabled><br><br>
+        
+        <div id="buttons" class="hidden">
+            <button onclick="submitForm()">Submit</button>
+            <button onclick="resetForm()">Cancel</button>
+        </div>
+    </div>
+    
+    <div id="greetingMessage" class="hidden"></div>
+
+    <script>
+        function validateCustomerId() {
+            const idPattern = /^[A-Z]{3}\d{7}[!@#]$/;
+            let customerId = document.getElementById("customerId").value;
+            if (idPattern.test(customerId)) {
+                document.getElementById("customerName").disabled = false;
+            } else {
+                document.getElementById("customerName").disabled = true;
+            }
+        }
+        
+        function validateCustomerName() {
+            let name = document.getElementById("customerName").value;
+            if (name.length > 0) {
+                document.getElementById("password").disabled = false;
+            } else {
+                document.getElementById("password").disabled = true;
+            }
+        }
+        
+        function generatePassword() {
+            let name = document.getElementById("customerName").value;
+            let today = new Date();
+            let MDD = `${today.getMonth() + 1}${today.getDate()}`;
+            if (name.length > 0) {
+                let password = `${name.slice(-1).toUpperCase()}${name.length}#${MDD}${name.slice(0,2).toLowerCase()}`;
+                document.getElementById("password").value = password;
+                document.getElementById("buttons").classList.remove("hidden");
+            }
+        }
+        
+        function submitForm() {
+            let name = document.getElementById("customerName").value;
+            let greeting = "Good Evening!";
+            let hour = new Date().getHours();
+            if (hour < 12) {
+                greeting = "Good Morning!";
+            } else if (hour < 16) {
+                greeting = "Good Noon!";
+            }
+            document.getElementById("greetingMessage").innerHTML = `<div class='greeting'>${greeting}<br>${name.toUpperCase()}</div>`;
+            document.getElementById("greetingMessage").classList.remove("hidden");
+        }
+        
+        function resetForm() {
+            document.getElementById("customerId").value = "";
+            document.getElementById("customerName").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("customerName").disabled = true;
+            document.getElementById("password").disabled = true;
+            document.getElementById("buttons").classList.add("hidden");
+            document.getElementById("greetingMessage").classList.add("hidden");
+        }
+    </script>
+</body>
+</html>
